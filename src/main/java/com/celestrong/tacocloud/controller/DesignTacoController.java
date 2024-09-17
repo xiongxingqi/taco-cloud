@@ -4,9 +4,11 @@ import com.celestrong.tacocloud.pojo.entity.Ingredient;
 import com.celestrong.tacocloud.pojo.entity.Ingredient.Type;
 import com.celestrong.tacocloud.pojo.entity.Taco;
 import com.celestrong.tacocloud.pojo.entity.TacoOrder;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -63,8 +65,11 @@ public class DesignTacoController {
     }
 
     @PostMapping
-    public String processTaco(Taco taco,
+    public String processTaco(@Valid Taco taco, Errors errors,
                               @ModelAttribute TacoOrder tacoOrder){
+        if (errors.hasErrors()) {
+            return "design";
+        }
         log.info("process Taco:{}",taco);
         tacoOrder.addTaco(taco);
         return "redirect:/orders/current";
