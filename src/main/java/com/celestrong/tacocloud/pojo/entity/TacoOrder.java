@@ -6,11 +6,22 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import org.hibernate.validator.constraints.CreditCardNumber;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Data
-public class TacoOrder {
+public class TacoOrder implements Serializable {
+
+    @Serial
+    private static final  long serialVersionUID=1L;
+
+    private Long id;
+    //下单时间
+    private Date placeAt;
+
     @NotBlank(message = "送货地址不能为空")
     private String deliveryName;
     @NotBlank(message = "街道不能为空")

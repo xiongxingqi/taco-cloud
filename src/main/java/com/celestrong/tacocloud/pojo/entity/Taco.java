@@ -4,9 +4,15 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
+import java.util.Date;
 import java.util.List;
 @Data
 public class Taco {
+
+    private Long id;
+
+    private Date createAt = new Date();
+
     @NotNull
     @Size(min = 5 , message = "名称不得小于5个字符")
     private String name;
