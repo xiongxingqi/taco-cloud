@@ -1,6 +1,9 @@
 spring:
   application:
     name: taco-cloud
+  datasource:
+    generate-unique-name: false
+    name: tacoCloud
 logging:
   pattern:
     dateformat: "yyyy-MM-dd HH:mm:ss"
