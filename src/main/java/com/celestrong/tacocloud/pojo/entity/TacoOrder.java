@@ -20,7 +20,7 @@ public class TacoOrder implements Serializable {
 
     private Long id;
     //下单时间
-    private Date placeAt;
+    private Date placedAt;
 
     @NotBlank(message = "送货地址不能为空")
     private String deliveryName;

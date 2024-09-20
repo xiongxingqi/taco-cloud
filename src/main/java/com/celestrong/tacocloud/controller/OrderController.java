@@ -1,6 +1,7 @@
 package com.celestrong.tacocloud.controller;
 
 import com.celestrong.tacocloud.pojo.entity.TacoOrder;
+import com.celestrong.tacocloud.repository.OrderRepository;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -11,11 +12,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import java.sql.Types;
+
 @Slf4j
 @Controller
 @RequestMapping("/orders")
 @SessionAttributes("tacoOrder")
 public class OrderController{
+
+    private final OrderRepository orderRepository;
+
+    public OrderController(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
+    }
 
     @GetMapping("/current")
     public String orderForm(){
@@ -30,6 +39,7 @@ public class OrderController{
             return "orderForm";
         }
         log.info("order submit: {}",tacoOrder);
+        orderRepository.save(tacoOrder);
         sessionStatus.setComplete();
         return "redirect:/";
     }

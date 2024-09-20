@@ -42,6 +42,7 @@ public class DesignTacoController {
     }
 
     List<Ingredient> filterByType(Iterable<Ingredient> ingredients,Type type){
+        // todo 看一看Iterable,StreamSupport
         return StreamSupport
                 .stream(ingredients.spliterator(),false)
                 .filter(ingredient -> ingredient.getType().equals(type))
